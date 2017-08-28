@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="temperatureUnits">
+        <item name="C">@string/celsius</item>
+        <item name="F">@string/fahrenheit</item>
+        <item name="K">@string/kelvin</item>
+    </string-array>
+
+    <string-array name="temperatureUnitsValues">
+        <item name="C">°C</item>
+        <item name="F">°F</item>
+        <item name="K">K</item>
+    </string-array>
+
+    <string-array name="speedUnits">
+        <item name="mps">@string/mps</item>
+        <item name="kph">@string/kph</item>
+        <item name="mph">@string/mph</item>
+        <item name="bft">@string/bft</item>
+        <item name="kn">@string/kn</item>
+    </string-array>
+
+    <string-array name="speedUnitsValues">
+        <item name="mps">m/s</item>
+        <item name="kph">kph</item>
+        <item name="mph">mph</item>
+        <item name="bft">bft</item>
+        <item name="kn">kn</item>
+    </string-array>
+
+    <string-array name="pressureUnits">
+        <item name="hpa">@string/hpa</item>
+        <item name="b">@string/b</item>
+        <item name="mmhg">@string/mmhg</item>
+    </string-array>
+
+    <string-array name="pressureUnitsValues">
+        <item name="hpa">hPa</item>
+        <item name="b">b</item>
+        <item name="mmhg">mm Hg</item>
+    </string-array>
+
+    <string-array name="citiesValues">
+        <item name="rennes">Rennes</item>
+        <item name="reims">Reims</item>
+    </string-array>
+
+    <string-array name="language">
+        <item name="english">English</item>
+        <item name="french">French</item>
+    </string-array>
+
+    <string-array name="languageValues">
+        <item name="english">English</item>
+        <item name="french">French</item>
+    </string-array>
+
+</resources>

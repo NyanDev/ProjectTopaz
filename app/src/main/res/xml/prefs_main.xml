@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/settings_title_units">
+        <ListPreference
+            android:defaultValue="°C"
+            android:entries="@array/temperatureUnits"
+            android:entryValues="@array/temperatureUnitsValues"
+            android:key="temperatureUnit"
+            android:summary="%s"
+            android:title="@string/settings_temperature" />
+
+        <ListPreference
+            android:defaultValue="m/s"
+            android:entries="@array/speedUnits"
+            android:entryValues="@array/speedUnitsValues"
+            android:key="speedUnit"
+            android:summary="%s"
+            android:title="@string/settings_speed" />
+
+        <ListPreference
+            android:defaultValue="hPa"
+            android:entries="@array/pressureUnits"
+            android:entryValues="@array/pressureUnitsValues"
+            android:key="pressureUnit"
+            android:summary="%s"
+            android:title="@string/settings_pressure" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_title_user_extra">
+        <EditTextPreference
+            android:key="apiKey"
+            android:summary="test"
+            android:title="@string/settings_apiKey" />
+        </PreferenceCategory>
+
+
+
+</PreferenceScreen>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Nyan Weather</string>
+    <string name="beaufort_label_0">Calme</string>
+    <string name="beaufort_label_1">Très légère brise</string>
+    <string name="beaufort_label_10">Tempête</string>
+    <string name="beaufort_label_11">Violente tempête</string>
+    <string name="beaufort_label_12">Ouragan</string>
+    <string name="beaufort_label_2">Légère brise</string>
+    <string name="beaufort_label_3">Petite brise</string>
+    <string name="beaufort_label_4">Brise modérée</string>
+    <string name="beaufort_label_5">Brise fraîche</string>
+    <string name="beaufort_label_6">Forte brise</string>
+    <string name="beaufort_label_7">Fortes bourrasques</string>
+    <string name="beaufort_label_8">Vent violent</string>
+    <string name="beaufort_label_9">Vent très violent</string>
+    <string name="kn">Noeuds</string>
+    <string name="kph">Kilomètre par heure</string>
+    <string name="mmhg">Milimètre de mercure</string>
+    <string name="mph">Mile par heure</string>
+    <string name="mps">Mètre par seconde</string>
+    <string name="place_not_found">Oops, aucune information météorologique disponible</string>
+    <string name="search_hint">Cherchez une ville</string>
+    <string name="settings_apiKey">Clé API</string>
+    <string name="settings_apiKey_summary">Clé personelle pour l\'API OpenWeatherMap</string>
+    <string name="settings_title_units">Unités</string>
+    <string name="settings_choose_pressure">Choisir l\'unité de pression</string>
+    <string name="settings_choose_speed">Choisir l\'unité de vitesse</string>
+    <string name="settings_choose_temperature">Choisir l\'unité de température</string>
+    <string name="settings_count">Nombre de jours</string>
+    <string name="settings_pressure">Unité de pression</string>
+    <string name="settings_speed">Unité de vitesse</string>
+    <string name="settings_temperature">Unité de température</string>
+    <string name="settings_title_ui">Interface utilisateur</string>
+    <string name="settings_title_user_extra">Autres</string>
+    <string name="title_activity_settings">Paramètres</string>
+</resources>
