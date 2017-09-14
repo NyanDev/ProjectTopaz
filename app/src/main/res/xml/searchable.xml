@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <searchable xmlns:android="http://schemas.android.com/apk/res/android"
-    android:label="@string/app_label"
+    android:label="@string/search_hint"
     android:hint="@string/search_hint"
-    android:imeOptions="actionDone">
+    android:imeOptions="actionDone"
+    android:includeInGlobalSearch="true"
+    android:queryAfterZeroResults="true"
+    android:searchSettingsDescription="@string/search_hint"
+    android:searchMode="queryRewriteFromText"
+    android:searchSuggestAuthority="com.example.projecttopaz"
+    android:searchSuggestIntentAction="android.pro">
 </searchable>

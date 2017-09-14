@@ -7,8 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#adb7ba"
-        android:padding="12dp"
+        android:padding="6dp"
 
         android:orientation="horizontal">
 
@@ -16,9 +15,9 @@
             android:id="@+id/itemDayForecastExpand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_gravity="center"
-            android:paddingLeft="12dp"
+            android:paddingStart="12dp"
             android:text="Day"
             android:textSize="15sp"/>
 
@@ -26,27 +25,27 @@
             android:id="@+id/itemTemperatureForecastExpand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_alignParentRight="true"
+            android:layout_gravity="end"
+            android:layout_alignParentEnd="true"
             android:text="--°"
             android:textSize="15sp"
-            android:paddingRight="12dp"/>
+            android:paddingEnd="12dp"/>
 
         <TextView
             android:id="@+id/itemIconForecastExpand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="O"
-            android:layout_toLeftOf="@id/itemTemperatureForecastExpand"
-            android:paddingRight="16dp"/>
+            android:layout_toStartOf="@id/itemTemperatureForecastExpand"
+            android:paddingEnd="16dp"/>
 
         <TextView
             android:id="@+id/itemDescriptionForecastExpand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="description of the weather"
-            android:layout_toLeftOf="@id/itemIconForecastExpand"
-            android:paddingRight="16dp"/>
+            android:layout_toStartOf="@id/itemIconForecastExpand"
+            android:paddingEnd="16dp"/>
 
 
     </RelativeLayout>

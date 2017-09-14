@@ -98,11 +98,16 @@ public class WeatherCardFragment extends Fragment {
     // This method will be called when an event is posted
     @Subscribe(threadMode = ThreadMode.MainThread, sticky = true)
     public void onMessageEvent(AllPurposeEvent event){
-        fetchWeatherCity(event.getMessage(), apiKey);
-        weatherCardRecyclerAdapter.notifyDataSetChanged();
+        if(event.getMessage().equals("preferencesActivityEvent")){
+            // update data
+            weatherCardRecyclerAdapter.notifyDataSetChanged();
+        } else {
+            fetchWeatherCity(event.getMessage(), apiKey);
+            weatherCardRecyclerAdapter.notifyDataSetChanged();
+        }
     }
 
-    @Subscribe(threadMode = ThreadMode.MainThread, sticky = false)
+    @Subscribe(threadMode = ThreadMode.MainThread)
     public void onWeatherForecastEvent(WeatherForecastEvent event){
         fetchWeatherForecastsForCityName(event.getPosition(), event.getLocation(), 5, apiKey);
     }
@@ -118,7 +123,7 @@ public class WeatherCardFragment extends Fragment {
         helper.attachToRecyclerView(weatherRecyclerView);
     }
 
-    public void fetchWeatherCity(String city, String apiKey){
+    public void fetchWeatherCity(final String city, final String apiKey){
         try{
             final Observable<WeatherInfo> weatherInformationObservable = weatherService.fetchWeatherForCity(city, apiKey);
             Observer weatherInfoObserver = new Observer() {
@@ -133,13 +138,15 @@ public class WeatherCardFragment extends Fragment {
                 public void onError(Throwable e) {
                     Log.e("Error", e.getMessage());
                     Log.e("fetchWeatherCity", "city not found");
-                    Toast.makeText(getActivity(), "Oops, an error occured", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), "Oops, an error occured", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onNext(Object o) {
                     WeatherInfo weatherInfo = (WeatherInfo) o;
                     weatherCardRecyclerAdapter.addWeather(weatherInfo);
+                    fetchWeatherForecastsForCityName(weatherCardRecyclerAdapter.getItemCount()-1, city, 5, apiKey);
+
                 }
             };
             weatherInformationObservable.subscribeOn(Schedulers.newThread())
@@ -173,7 +180,7 @@ public class WeatherCardFragment extends Fragment {
                         weatherDays.add(weatherForecast.getDays().get(i));
                     }
                     weatherCardRecyclerAdapter.addWeatherForecast(position, weatherDays);
-                    weatherCardRecyclerAdapter.notifyDataSetChanged();
+                    //weatherCardRecyclerAdapter.notifyDataSetChanged();
                 }
             };
             weatherForecastObservable.subscribeOn(Schedulers.newThread())

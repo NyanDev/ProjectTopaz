@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Nyan Weather</string>
+    <string name="app_name" translatable="false">Weather</string>
 
     <string name="weather_sunny">&#xf00d;</string>
     <string name="weather_clear_night">&#xf02e;</string>
@@ -250,6 +250,7 @@
     <string name="settings_title_ui">User interface</string>
     <string name="settings_title_user_extra">Other</string>
     <string name="settings_language">Language</string>
+    <string name="settings_about">About</string>
 
     <string name="settings_count">Number of days to load</string>
     <string name="settings_apiKey">API key</string>
@@ -263,8 +264,20 @@
     <string name="search_hint">Search city</string>
     <string name="menu_update" translatable="false">menu_update</string>
 
-    <string name="fa_plus" translatable="false">search</string>
+    <string name="fa_plus" translatable="false">&#xf067;</string>
     <string name="fa_cog" translatable="false">&#xf013;</string>
+    <string name="fa_search" translatable="false">&#xf002;</string>
+
+    <string name="humidity_icon" translatable="false">&#xf07a;</string>
+    <string name="wind_icon" translatable="false">&#xf050;</string>
+    <string name="pressure_icon" translatable="false">&#xf079;</string>
+
+    <string name="app_credits">An opensource weather app.\n\nDeveloped by Xuan-Nghia Hoang.\n\n</string>
+
+    <string name="smashicon_link"><a href="https://smashicons.com/">Smashicons</a></string>
+    <string name="flaticon_link"><a href="http://www.flaticon.com/">flaticon</a></string>
+    <string name="openweathermap_link"><a href="http://openweathermap.org/">OpenWeatherMap</a></string>
+    <string name="openweathermap_license_link"><a hreaf="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons License</a></string>
 
 
 </resources>

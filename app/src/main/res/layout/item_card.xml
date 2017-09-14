@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="16dp">
+    android:background="@android:color/transparent"
+    android:padding="12dp"
+    android:id="@+id/general_card">
 
     <android.support.v7.widget.CardView
         android:id="@+id/weatherCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="3dp">
+        app:cardCornerRadius="10dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,29 +23,42 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/cardItemLocation"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Location"
-                        android:textColor="?android:textColorPrimary"
-                        android:textSize="16dp"
-                        android:textStyle="bold" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/cardItemDay"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Day"
-                        android:textSize="16dp" />
+                        <TextView
+                            android:id="@+id/cardItemLocation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Location"
+                            android:textColor="?android:textColorPrimary"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" - "
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/cardItemDay"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Day"
+                            android:textSize="16sp" />
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -51,19 +67,19 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/cardItemTemperature"
+                            android:id="@+id/carditemPressureIcon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="temp"
-                            android:textSize="16dp" />
+                            android:text="@string/pressure_icon"
+                            android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/cardItemWindDirection"
+                            android:id="@+id/cardItemPressure"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:text="wDirection"
-                            android:textSize="16dp" />
+                            android:layout_marginStart="16dp"
+                            android:text="pressure"
+                            android:textSize="16sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -71,8 +87,51 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
+                        <TextView
+                            android:id="@+id/cardItemWindIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/wind_icon"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/cardItemWind"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="wSpeed"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/cardItemWindDirection"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="wDirection"
+                            android:textSize="16sp" />
                     </LinearLayout>
 
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/cardItemHumidityIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/humidity_icon"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/cardItemHumidity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:text="humidity"
+                            android:textSize="16sp" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <TextView
@@ -82,20 +141,28 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_weight="1"
                     android:text="o"
-                    android:textSize="48dp" />
+                    android:textSize="48sp" />
+
+                <TextView
+                    android:id="@+id/cardItemTemperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="temperature"
+                    android:textSize="16sp"
+                    android:layout_alignEnd="@id/cardItemIcon"
+                    android:layout_below="@id/cardItemIcon"/>
 
                 <TextView
                     android:id="@+id/cardItemDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:text="description"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:layout_alignEnd="@id/cardItemIcon"
-                    android:layout_below="@id/cardItemIcon"/>
+                    android:layout_below="@id/cardItemTemperature"/>
 
             </RelativeLayout>
 
@@ -103,15 +170,15 @@
                 android:id="@+id/cardItemForecastExpansion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="16dp"
                 app:el_duration="1000"
                 app:el_expanded="false"
-                app:el_parallax="0.5">
+                app:el_parallax="0.5"
+                android:background="@drawable/round">
 
                 <android.support.v7.widget.ListViewCompat
                     android:id="@+id/lv_forecast"
                     android:layout_width="match_parent"
-                    android:layout_height="180dp"
+                    android:layout_height="130dp"
                     android:scrollbars="none"
                     android:requiresFadingEdge="none">
 
