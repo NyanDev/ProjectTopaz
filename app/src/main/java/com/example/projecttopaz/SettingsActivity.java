@@ -2,26 +2,19 @@ package com.example.projecttopaz;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
-import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-import android.view.View;
 import android.webkit.WebView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.projecttopaz.events.AllPurposeEvent;
-
-import org.w3c.dom.Text;
+import com.example.projecttopaz.interfaces.WeatherService;
 
 import butterknife.BindArray;
 import butterknife.BindString;
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 
@@ -52,6 +45,9 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (key.equals("apiKey")){
             // TODO 1: Test if apikey is valid
+            // make a call and check the return code
+            final WeatherService weatherService = SharedApp.getInstance().getRetrofit().create(WeatherService.class);
+
         }
     }
 

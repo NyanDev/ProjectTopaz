@@ -7,25 +7,20 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.projecttopaz.R;
+import com.example.projecttopaz.customViews.CustomFontTextView;
 import com.example.projecttopaz.models.WeatherDay;
-import com.example.projecttopaz.models.WeatherForecast;
 import com.example.projecttopaz.utils.Utility;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by xuan- on 26/08/2017.
@@ -108,7 +103,7 @@ public class WeatherExpandableForecastAdapter extends BaseAdapter{
             convertView = layoutInflater.inflate(R.layout.item_expanded_weather_forecast, parent, false);
             viewHolder.day = (TextView) convertView.findViewById(R.id.itemDayForecastExpand);
             viewHolder.temperature = (TextView) convertView.findViewById(R.id.itemTemperatureForecastExpand);
-            viewHolder.icon = (TextView) convertView.findViewById(R.id.itemIconForecastExpand);
+            viewHolder.icon = (CustomFontTextView) convertView.findViewById(R.id.itemIconForecastExpand);
             viewHolder.description = (TextView) convertView.findViewById(R.id.itemDescriptionForecastExpand);
 
 
@@ -130,8 +125,6 @@ public class WeatherExpandableForecastAdapter extends BaseAdapter{
         viewHolder.temperature.setText(String.format("%.1f %s", temperature, sharedPreferences.getString("temperatureUnit", "°C")));
 
         // -- Icon --
-        Typeface weatherFont = Typeface.createFromAsset(context.getAssets(), "font/weather.ttf");
-        viewHolder.icon.setTypeface(weatherFont);
         String weatherId = "wi_owm_" + Integer.toString(weatherDay.getWeather().get(0).getId());
         viewHolder.icon.setText(context.getResources().getIdentifier(weatherId, "string", context.getPackageName()));
 

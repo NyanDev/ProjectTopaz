@@ -5,37 +5,26 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.ListViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.OvershootInterpolator;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.projecttopaz.R;
-import com.example.projecttopaz.events.AllPurposeEvent;
-import com.example.projecttopaz.events.WeatherForecastEvent;
 import com.example.projecttopaz.models.WeatherDay;
-import com.example.projecttopaz.models.WeatherForecast;
 import com.example.projecttopaz.models.WeatherInfo;
 import com.example.projecttopaz.utils.Utility;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import de.greenrobot.event.EventBus;
 
 /**
  * Created by xuan- on 26/08/2017.
@@ -112,7 +101,6 @@ public class WeatherCardRecyclerAdapter extends RecyclerView.Adapter<WeatherCard
         holder.cardItemLocation.setText(weatherInfo.getName());
 
         // ---------- weather icon -------------
-        holder.cardItemIcon.setTypeface(holder.weatherFont);
         String weatherId = "wi_owm_" + Integer.toString(weatherInfo.getWeatherList().get(0).getId());
         holder.cardItemIcon.setText(context.getResources().getIdentifier(weatherId, "string", context.getPackageName()));
 
@@ -125,25 +113,21 @@ public class WeatherCardRecyclerAdapter extends RecyclerView.Adapter<WeatherCard
         holder.cardItemDescription.setText(weatherInfo.getWeatherList().get(0).getDescription());
 
         // ---------- weather wind  -------------
-        holder.cardItemWindIcon.setTypeface(holder.weatherFont);
 
         float windSpeed = Utility.convertWindSpeed((float)weatherInfo.getWind().getSpeed(), sharedPreferences);
         String speedUnit = sharedPreferences.getString("speedUnit", "m/s");
         holder.cardItemWind.setText(String.format("%.1f %s", windSpeed, speedUnit));
 
-        holder.cardItemWindDirection.setTypeface(holder.weatherFont);
         String windDirectionString = "wi_direction_" + Utility.windDegreeToDirection(weatherInfo.getWind().getDeg());
         holder.cardItemWindDirection.setText(context.getResources().getIdentifier(windDirectionString, "string", context.getPackageName()));
 
         // ---------- weather pressure  -------------
-        holder.cardItemPressureIcon.setTypeface(holder.weatherFont);
 
         float pressure = Utility.convertPressure((float)weatherInfo.getMain().getPressure(), sharedPreferences);
         String pressureUnit = sharedPreferences.getString("pressureUnit"," hPa");
         holder.cardItemPressure.setText(String.format("%.1f %s", pressure, pressureUnit));
 
         // ---------- weather humidity  -------------
-        holder.cardItemHumidityIcon.setTypeface(holder.weatherFont);
 
         float humidity = (float)weatherInfo.getMain().getHumidity();
         holder.cardItemHumidity.setText(String.format("%s", humidity));
@@ -177,7 +161,6 @@ public class WeatherCardRecyclerAdapter extends RecyclerView.Adapter<WeatherCard
         @BindView(R.id.lv_forecast) ListViewCompat lv_forecast;
         @BindView(R.id.weatherCard) CardView weatherCard;
 
-        Typeface weatherFont = Typeface.createFromAsset(context.getAssets(), "font/weather.ttf");
         Date lastUpdate;
 
 

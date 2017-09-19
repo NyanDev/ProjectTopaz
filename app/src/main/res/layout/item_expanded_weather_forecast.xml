@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -31,13 +32,15 @@
             android:textSize="15sp"
             android:paddingEnd="12dp"/>
 
-        <TextView
+        <com.example.projecttopaz.customViews.CustomFontTextView
             android:id="@+id/itemIconForecastExpand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="O"
             android:layout_toStartOf="@id/itemTemperatureForecastExpand"
-            android:paddingEnd="16dp"/>
+            android:paddingEnd="16dp"
+            app:fontName="weather.ttf"
+            />
 
         <TextView
             android:id="@+id/itemDescriptionForecastExpand"
@@ -45,7 +48,8 @@
             android:layout_height="wrap_content"
             android:text="description of the weather"
             android:layout_toStartOf="@id/itemIconForecastExpand"
-            android:paddingEnd="16dp"/>
+            android:paddingEnd="16dp"
+            android:textSize="12sp"/>
 
 
     </RelativeLayout>
