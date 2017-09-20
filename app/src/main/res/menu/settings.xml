@@ -10,6 +10,13 @@
         android:title="@string/fa_search" />
 
     <item
+        android:id="@+id/action_update"
+        android:title="@string/fa_refresh"
+        app:showAsAction="ifRoom|collapseActionView"
+        android:icon="@drawable/ic_sync_black_24dp"
+        />
+
+    <item
         android:id="@+id/menu_settings"
         android:title="@string/fa_cog"
         app:showAsAction="ifRoom"

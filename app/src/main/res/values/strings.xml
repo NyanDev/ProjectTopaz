@@ -267,6 +267,7 @@
     <string name="fa_plus" translatable="false">&#xf067;</string>
     <string name="fa_cog" translatable="false">&#xf013;</string>
     <string name="fa_search" translatable="false">&#xf002;</string>
+    <string name="fa_refresh" translatable="false">&#xf021;</string>
 
     <string name="humidity_icon" translatable="false">&#xf07a;</string>
     <string name="wind_icon" translatable="false">&#xf050;</string>

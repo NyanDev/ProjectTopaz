@@ -78,7 +78,7 @@ public class WeatherCardFragment extends Fragment {
     // This method will be called when an event is posted
     @Subscribe(threadMode = ThreadMode.MainThread, sticky = true)
     public void onMessageEvent(AllPurposeEvent event){
-        if(event.getMessage().equals("preferencesActivityEvent")){
+        if(event.getMessage().equals("mustUpdateData")){
             // update data
             weatherCardRecyclerAdapter.notifyDataSetChanged();
         } else {

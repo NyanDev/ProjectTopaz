@@ -137,34 +137,18 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case android.R.id.home:
                 Log.i("home","home");
+                break;
+            case R.id.action_update:
+                long current = System.currentTimeMillis();
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                if (current - sharedPreferences.getLong("lastAction", -1) >= 600000){
+                    sharedPreferences.edit().putLong("lastAction", current).apply();
+                    // send event to update recycler view
+                    EventBus.getDefault().postSticky(new AllPurposeEvent("mustUpdateData"));
+                }
+
         }
         return true;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode){
-            case RESULT_SETTINGS:
-                //displaySettings();
-
-
-            //TODO 2: handle the update of data
-            //WeatherRecyclerFragment weatherRecyclerFragment = new WeatherRecyclerFragment();
-            //getSupportFragmentManager().beginTransaction().replace(R.id.fragments_view, weatherRecyclerFragment).commit();
-
-        }
-    }
-
-    private void displaySettings(){
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        StringBuilder builder = new StringBuilder();
-
-        builder.append("\n Temperature unit : " + sharedPreferences.getString("temperatureUnit", "°C"));
-        builder.append("\n Pressure unit : " + sharedPreferences.getString("pressureUnit", "hPa"));
-        builder.append("\n Speed unit : " + sharedPreferences.getString("speedUnit", "m/s"));
-
     }
 
 }

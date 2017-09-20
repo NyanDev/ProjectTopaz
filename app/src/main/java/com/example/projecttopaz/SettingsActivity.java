@@ -54,7 +54,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        EventBus.getDefault().postSticky(new AllPurposeEvent("preferencesActivityEvent"));
+        EventBus.getDefault().postSticky(new AllPurposeEvent("mustUpdateData"));
     }
 
     @SuppressLint("ValidFragment")
