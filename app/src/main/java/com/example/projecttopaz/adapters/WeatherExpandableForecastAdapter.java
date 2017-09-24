@@ -104,7 +104,6 @@ public class WeatherExpandableForecastAdapter extends BaseAdapter{
             viewHolder.day = (TextView) convertView.findViewById(R.id.itemDayForecastExpand);
             viewHolder.temperature = (TextView) convertView.findViewById(R.id.itemTemperatureForecastExpand);
             viewHolder.icon = (CustomFontTextView) convertView.findViewById(R.id.itemIconForecastExpand);
-            viewHolder.description = (TextView) convertView.findViewById(R.id.itemDescriptionForecastExpand);
 
 
             convertView.setTag(viewHolder);
@@ -129,8 +128,8 @@ public class WeatherExpandableForecastAdapter extends BaseAdapter{
         viewHolder.icon.setText(context.getResources().getIdentifier(weatherId, "string", context.getPackageName()));
 
         // -- Description --
-        String description = weatherDay.getWeather().get(0).getDescription();
-        viewHolder.description.setText(description);
+        //String description = weatherDay.getWeather().get(0).getDescription();
+        //viewHolder.description.setText(description);
 
         return convertView;
     }

@@ -32,6 +32,6 @@ public interface WeatherService {
     @GET("/data/2.5/weather")
     Observable<WeatherInfo> fetchWeatherWithGeoCoord(@Query("lat") double latitude,
                                                      @Query("lon") double longitude,
-                                                @Query("apikey") String apiKey);
+                                                     @Query("apikey") String apiKey);
 
 }
