@@ -11,9 +11,14 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.MatrixCursor;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.provider.BaseColumns;
 import android.provider.Settings;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +37,11 @@ import android.widget.Toast;
 
 import com.example.projecttopaz.events.AllPurposeEvent;
 import com.example.projecttopaz.fragments.WeatherCardFragment;
+import com.firebase.jobdispatcher.Constraint;
+import com.firebase.jobdispatcher.FirebaseJobDispatcher;
+import com.firebase.jobdispatcher.GooglePlayDriver;
+import com.firebase.jobdispatcher.RetryStrategy;
+import com.firebase.jobdispatcher.Trigger;
 
 import java.util.List;
 
@@ -60,6 +70,22 @@ public class MainActivity extends AppCompatActivity {
         WeatherCardFragment weatherCardFragment = new WeatherCardFragment();
         ft.add(R.id.fragments_view, weatherCardFragment)
                 .commit();
+
+        FirebaseJobDispatcher dispatcher= new FirebaseJobDispatcher(
+                new GooglePlayDriver(MainActivity.this)
+        );
+        dispatcher.mustSchedule(
+                dispatcher.newJobBuilder()
+                .setService(UpdateDataService.class)
+                .setTag("UpdateDataService")
+                .setRecurring(true)
+                .setTrigger(Trigger.executionWindow(3600, 3600*3))// will trigger between 1 hour and 3 hours
+                .setConstraints(Constraint.ON_ANY_NETWORK)
+                .setReplaceCurrent(false)
+                .setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL)
+                .build()
+        );
+
     }
 
     @Override
@@ -140,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("home", "home");
                 break;
             case R.id.action_update:
-                updateData(300000);
+                updateData(900000);
 
         }
         return true;

@@ -55,6 +55,7 @@ dependencies {
     compile 'junit:junit:4.12'
     compile 'de.greenrobot:eventbus:3.+'
     compile 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
+    compile 'com.firebase:firebase-jobdispatcher:0.8.2'
 
 
 }
