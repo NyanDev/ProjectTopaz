@@ -1,39 +1,20 @@
 package com.example.projecttopaz;
 
-import android.Manifest;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.SearchManager;
-import android.app.SearchableInfo;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.database.MatrixCursor;
-import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.preference.PreferenceManager;
-import android.provider.BaseColumns;
-import android.provider.Settings;
 import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.CursorAdapter;
-import android.widget.FilterQueryProvider;
-import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
 
 import com.example.projecttopaz.events.AllPurposeEvent;
 import com.example.projecttopaz.fragments.WeatherCardFragment;
@@ -42,8 +23,6 @@ import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.firebase.jobdispatcher.RetryStrategy;
 import com.firebase.jobdispatcher.Trigger;
-
-import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
@@ -71,21 +50,20 @@ public class MainActivity extends AppCompatActivity {
         ft.add(R.id.fragments_view, weatherCardFragment)
                 .commit();
 
-        FirebaseJobDispatcher dispatcher= new FirebaseJobDispatcher(
+        FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(
                 new GooglePlayDriver(MainActivity.this)
         );
         dispatcher.mustSchedule(
                 dispatcher.newJobBuilder()
-                .setService(UpdateDataService.class)
-                .setTag("UpdateDataService")
-                .setRecurring(true)
-                .setTrigger(Trigger.executionWindow(3600, 3600*3))// will trigger between 1 hour and 3 hours
-                .setConstraints(Constraint.ON_ANY_NETWORK)
-                .setReplaceCurrent(false)
-                .setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL)
-                .build()
+                        .setService(UpdateDataService.class)
+                        .setTag("UpdateDataService")
+                        .setRecurring(true)
+                        .setTrigger(Trigger.executionWindow(3600, 3600 * 3))// will trigger between 1 hour and 3 hours
+                        .setConstraints(Constraint.ON_ANY_NETWORK)
+                        .setReplaceCurrent(false)
+                        .setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL)
+                        .build()
         );
-
     }
 
     @Override

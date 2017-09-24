@@ -156,6 +156,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:text="temperature"
+                    android:paddingEnd="20dp"
                     android:textSize="16sp"
                     android:layout_alignEnd="@id/cardItemIcon"
                     android:layout_below="@id/cardItemIcon"/>
@@ -165,6 +166,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
+                    android:paddingEnd="20dp"
                     android:text="description"
                     android:textSize="16sp"
                     android:layout_alignEnd="@id/cardItemIcon"

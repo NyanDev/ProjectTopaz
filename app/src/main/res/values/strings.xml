@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Weather</string>
+    <string name="app_name" translatable="false">Weatherya</string>
 
     <string name="weather_sunny">&#xf00d;</string>
     <string name="weather_clear_night">&#xf02e;</string>

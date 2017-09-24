@@ -89,6 +89,7 @@ public class WeatherCardFragment extends Fragment {
         }
     }
 
+
     @Subscribe(threadMode = ThreadMode.MainThread)
     public void onWeatherForecastEvent(WeatherForecastEvent event){
         fetchWeatherForecastsForCityName(event.getPosition(), event.getLocation(), 5, apiKey);
@@ -119,6 +120,13 @@ public class WeatherCardFragment extends Fragment {
                 weatherDays.add(weatherForecast.getDays().get(i));
             }
             weatherCardRecyclerAdapter.addWeatherForecast(position, weatherDays);
+        });
+    }
+
+    public void fetchWeatherCityWithGeoCoord(final double lat, final double lon, final String apiKey){
+        NetworkRequest.perform(weatherService.fetchWeatherWithGeoCoord(lat, lon, apiKey), weatherInfo -> {
+            weatherCardRecyclerAdapter.addWeather(weatherInfo);
+            fetchWeatherForecastsForCityName(weatherCardRecyclerAdapter.getItemCount()-1, weatherInfo.getName(), 5, apiKey);
         });
     }
 
