@@ -81,6 +81,8 @@ public class WeatherCardFragment extends Fragment {
         if(event.getMessage().equals("mustUpdateData")){
             // update data
             weatherCardRecyclerAdapter.notifyDataSetChanged();
+        } else if (event.getMessage().equals("fetchNewData")) {
+            updateWeatherCard();
         } else {
             fetchWeatherCity(event.getMessage(), apiKey);
             weatherCardRecyclerAdapter.notifyDataSetChanged();
@@ -118,6 +120,25 @@ public class WeatherCardFragment extends Fragment {
             }
             weatherCardRecyclerAdapter.addWeatherForecast(position, weatherDays);
         });
+    }
+
+    public void updateWeatherCity(final int position, final String city, final String apiKey){
+        NetworkRequest.perform(weatherService.fetchWeatherForCity(city, apiKey), weatherInfo -> {
+            weatherCardRecyclerAdapter.setWeatherInfo(position, weatherInfo);
+            fetchWeatherForecastsForCityName(weatherCardRecyclerAdapter.getItemCount()-1, city, 5, apiKey);
+        });
+    }
+
+    public void updateWeatherCard(){
+        String city;
+        for (int i = 0; i < weatherCardRecyclerAdapter.getItemCount(); i++){
+            city = weatherCardRecyclerAdapter.getWeatherInfo(i).getName();
+            if (city.isEmpty()){
+                    return;
+            }
+            updateWeatherCity(i, city, apiKey);
+        }
+        weatherCardRecyclerAdapter.notifyDataSetChanged();
     }
 
 }

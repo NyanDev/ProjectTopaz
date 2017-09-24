@@ -27,16 +27,12 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/settings_title_user_extra">
-        <EditTextPreference
-            android:key="apiKey"
-            android:summary=""
-            android:hint="enter your API key"
-            android:title="@string/settings_apiKey" />
+        <Preference
+            android:title="About"
+            android:key="@string/settings_about"/>
         </PreferenceCategory>
 
-    <Preference
-        android:title="About"
-        android:key="@string/settings_about"/>
+
 
 
 </PreferenceScreen>

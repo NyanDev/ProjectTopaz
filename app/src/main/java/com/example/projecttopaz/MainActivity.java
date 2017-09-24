@@ -1,5 +1,6 @@
 package com.example.projecttopaz;
 
+import android.Manifest;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.SearchManager;
@@ -7,10 +8,13 @@ import android.app.SearchableInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.preference.PreferenceManager;
 import android.provider.BaseColumns;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +28,7 @@ import android.view.View;
 import android.widget.CursorAdapter;
 import android.widget.FilterQueryProvider;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 import com.example.projecttopaz.events.AllPurposeEvent;
 import com.example.projecttopaz.fragments.WeatherCardFragment;
@@ -43,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
     public android.support.v4.widget.SimpleCursorAdapter mAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,15 +60,14 @@ public class MainActivity extends AppCompatActivity {
         WeatherCardFragment weatherCardFragment = new WeatherCardFragment();
         ft.add(R.id.fragments_view, weatherCardFragment)
                 .commit();
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.settings, menu);
 
-        final String[] from = new String[] {"cityName"};
-        final int[] to = new int[] {android.R.id.text1};
+        final String[] from = new String[]{"cityName"};
+        final int[] to = new int[]{android.R.id.text1};
         mAdapter = new android.support.v4.widget.SimpleCursorAdapter(
                 getApplication(),
                 R.layout.item_search_suggestion,
@@ -119,36 +122,37 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public void onQuerySubmit(SearchView searchView, String query){
+    public void onQuerySubmit(SearchView searchView, String query) {
         EventBus.getDefault().postSticky(new AllPurposeEvent(query));
         searchView.setQuery("", false);
         searchView.setIconified(true);
         searchView.onActionViewCollapsed();
-
-
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menu_settings:
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
                 break;
             case android.R.id.home:
-                Log.i("home","home");
+                Log.i("home", "home");
                 break;
             case R.id.action_update:
-                long current = System.currentTimeMillis();
-                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                if (current - sharedPreferences.getLong("lastAction", -1) >= 600000){
-                    sharedPreferences.edit().putLong("lastAction", current).apply();
-                    // send event to update recycler view
-                    EventBus.getDefault().postSticky(new AllPurposeEvent("mustUpdateData"));
-                }
+                updateData(300000);
 
         }
         return true;
     }
 
+    public void updateData(int timer) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        long current = System.currentTimeMillis();
+        if (current - sharedPreferences.getLong("lastAction", -1) >= timer) {
+            sharedPreferences.edit().putLong("lastAction", current).apply();
+            // send event to update recycler view
+            EventBus.getDefault().postSticky(new AllPurposeEvent("fetchNewData"));
+        }
+    }
 }

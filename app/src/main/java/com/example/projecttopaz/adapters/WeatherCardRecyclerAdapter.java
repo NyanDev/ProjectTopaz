@@ -72,6 +72,15 @@ public class WeatherCardRecyclerAdapter extends RecyclerView.Adapter<WeatherCard
         notifyItemRemoved(position);
     }
 
+    public WeatherInfo getWeatherInfo(int position){
+        return weatherInfos.get(position);
+    }
+
+    public void setWeatherInfo( int position, WeatherInfo weatherInfo){
+        weatherInfos.set(position, weatherInfo);
+        notifyItemChanged(position);
+    }
+
     public void addWeatherForecast(int position, ArrayList<WeatherDay> weatherForecast){
         weatherForecasts.get(position).clearForecast();
         weatherForecasts.get(position).addWeatherForecast(weatherForecast);
