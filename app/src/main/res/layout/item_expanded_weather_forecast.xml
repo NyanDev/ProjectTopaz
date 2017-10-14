@@ -32,7 +32,7 @@
             android:textSize="15sp"
             android:paddingEnd="12dp"/>
 
-        <com.example.projecttopaz.customViews.CustomFontTextView
+        <com.nyandev.projecttopaz.customViews.CustomFontTextView
             android:id="@+id/itemIconForecastExpand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -66,7 +66,7 @@
                         android:layout_marginTop="16dp"
                         android:orientation="horizontal">
 
-                        <com.example.projecttopaz.customViews.CustomFontTextView
+                        <com.nyandev.projecttopaz.customViews.CustomFontTextView
                             android:id="@+id/carditemPressureIcon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <com.example.projecttopaz.customViews.CustomFontTextView
+                        <com.nyandev.projecttopaz.customViews.CustomFontTextView
                             android:id="@+id/cardItemWindIcon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
                             android:text="wSpeed"
                             android:textSize="16sp" />
 
-                        <com.example.projecttopaz.customViews.CustomFontTextView
+                        <com.nyandev.projecttopaz.customViews.CustomFontTextView
                             android:id="@+id/cardItemWindDirection"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <com.example.projecttopaz.customViews.CustomFontTextView
+                        <com.nyandev.projecttopaz.customViews.CustomFontTextView
                             android:id="@+id/cardItemHumidityIcon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -138,7 +138,7 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <com.example.projecttopaz.customViews.CustomFontTextView
+                <com.nyandev.projecttopaz.customViews.CustomFontTextView
                     android:id="@+id/cardItemIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -2,10 +2,18 @@ apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'AndroidKey'
+            keyPassword 'keyride7433'
+            storeFile file('C:/Users/xuan-/keystores/android.jks')
+            storePassword 'storekeyride7433'
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "com.example.projecttopaz"
+        applicationId "com.nyandev.projecttopaz"
         minSdkVersion 21
         targetSdkVersion 25
         versionCode 1
@@ -16,9 +24,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
-
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -26,13 +34,12 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
     //compile group: 'io.reactivex', name: 'rxandroid', version: '0.24.0'
-    
+
     // settings menu
     compile 'com.android.support:appcompat-v7:25.3.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -56,6 +63,4 @@ dependencies {
     compile 'de.greenrobot:eventbus:3.+'
     compile 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
     compile 'com.firebase:firebase-jobdispatcher:0.8.2'
-
-
 }
