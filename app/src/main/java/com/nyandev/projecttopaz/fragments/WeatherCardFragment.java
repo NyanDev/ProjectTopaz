@@ -17,7 +17,7 @@ import com.nyandev.projecttopaz.adapters.WeatherCardRecyclerAdapter;
 import com.nyandev.projecttopaz.adapters.WeatherExpandableForecastAdapter;
 import com.nyandev.projecttopaz.events.AllPurposeEvent;
 import com.nyandev.projecttopaz.events.WeatherForecastEvent;
-import com.nyandev.projecttopaz.interfaces.WeatherService;
+import com.nyandev.projecttopaz.models.interfaces.WeatherService;
 import com.nyandev.projecttopaz.models.WeatherDay;
 import com.nyandev.projecttopaz.models.WeatherForecast;
 import com.nyandev.projecttopaz.utils.NetworkRequest;

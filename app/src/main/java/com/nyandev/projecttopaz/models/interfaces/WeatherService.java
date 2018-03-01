@@ -1,4 +1,4 @@
-package com.nyandev.projecttopaz.interfaces;
+package com.nyandev.projecttopaz.models.interfaces;
 
 import com.nyandev.projecttopaz.models.WeatherForecast;
 import com.nyandev.projecttopaz.models.WeatherInfo;
