@@ -1,28 +1,9 @@
 package com.nyandev.projecttopaz;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.CursorAdapter;
 
-import com.nyandev.projecttopaz.events.AllPurposeEvent;
-import com.nyandev.projecttopaz.fragments.WeatherCardFragment;
-import com.firebase.jobdispatcher.Constraint;
-import com.firebase.jobdispatcher.FirebaseJobDispatcher;
-import com.firebase.jobdispatcher.GooglePlayDriver;
-import com.firebase.jobdispatcher.RetryStrategy;
-import com.firebase.jobdispatcher.Trigger;
-import com.nyandev.projecttopaz.ui.settings.SettingsActivity;
-
-import de.greenrobot.event.EventBus;
+import com.nyandev.projecttopaz.ui.weathercard.WeatherActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        startActivity(WeatherActivity.getStartIntent(this));
+
+/**
         setContentView(R.layout.activity_main);
         // ensure that we set all the default value from preference manager
         PreferenceManager.setDefaultValues(this, R.xml.prefs_main, false);
@@ -46,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction ft = fm.beginTransaction();
 
         //fragments
-        WeatherCardFragment weatherCardFragment = new WeatherCardFragment();
+        WeatherCardFragmentOld weatherCardFragment = new WeatherCardFragmentOld();
         ft.add(R.id.fragments_view, weatherCardFragment)
                 .commit();
 
@@ -70,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.settings, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
 
         final String[] from = new String[]{"cityName"};
         final int[] to = new int[]{android.R.id.text1};
@@ -160,5 +144,8 @@ public class MainActivity extends AppCompatActivity {
             // send event to update recycler view
             EventBus.getDefault().postSticky(new AllPurposeEvent("fetchNewData"));
         }
+    }
+}
+*/
     }
 }

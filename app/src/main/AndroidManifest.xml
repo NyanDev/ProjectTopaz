@@ -29,11 +29,16 @@
         </activity>
 
         <activity
+            android:name="com.nyandev.projecttopaz.ui.weathercard.WeatherActivity"
+            android:label="Weather">
+        </activity>
+
+        <activity
             android:name="com.nyandev.projecttopaz.ui.settings.SettingsActivity"
             android:label="Settings"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".ui.weathercard.WeatherActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".ui.weathercard.WeatherActivity"/>
         </activity>
 
         <service android:name="com.nyandev.projecttopaz.UpdateDataService"
