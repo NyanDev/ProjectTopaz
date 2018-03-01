@@ -1,6 +1,6 @@
 package com.nyandev.projecttopaz;
 
-import com.nyandev.projecttopaz.events.AllPurposeEvent;
+import com.nyandev.projecttopaz.data.events.AllPurposeEvent;
 import com.firebase.jobdispatcher.JobParameters;
 import com.firebase.jobdispatcher.JobService;
 

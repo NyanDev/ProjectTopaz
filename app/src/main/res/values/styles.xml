@@ -7,6 +7,17 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+
+    </style>
+
+    <style name="HeaderBar">
+        <item name="android:background">#303F9F</item>
+    </style>
+
+
+    <style name="Theme.GuidelinesCompat.Light.DarkToolbar" parent="Theme.AppCompat.Light.DarkActionBar">
+
+
     </style>
 
 </resources>

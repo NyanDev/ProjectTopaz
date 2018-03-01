@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.nyandev.projecttopaz.R;
 import com.nyandev.projecttopaz.customViews.CustomFontTextView;
-import com.nyandev.projecttopaz.models.WeatherDay;
+import com.nyandev.projecttopaz.data.models.WeatherDay;
 import com.nyandev.projecttopaz.utils.Utility;
 
 import java.text.SimpleDateFormat;

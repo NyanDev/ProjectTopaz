@@ -1,16 +1,11 @@
 package com.nyandev.projecttopaz.ui.weathercard;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.ListViewCompat;
-import android.support.v7.widget.RecyclerView;
 
 import com.nyandev.projecttopaz.SharedApp;
 import com.nyandev.projecttopaz.adapters.WeatherCardRecyclerAdapter;
-import com.nyandev.projecttopaz.adapters.WeatherExpandableForecastAdapter;
-import com.nyandev.projecttopaz.models.WeatherDay;
-import com.nyandev.projecttopaz.models.WeatherForecast;
-import com.nyandev.projecttopaz.models.interfaces.WeatherService;
+import com.nyandev.projecttopaz.data.models.WeatherDay;
+import com.nyandev.projecttopaz.data.models.interfaces.WeatherService;
 import com.nyandev.projecttopaz.utils.NetworkRequest;
 
 import java.util.ArrayList;

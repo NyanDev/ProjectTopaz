@@ -7,20 +7,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.SearchView;
 import android.widget.Toast;
-import android.support.v7.widget.Toolbar;
 
 import com.nyandev.projecttopaz.R;
-import com.nyandev.projecttopaz.events.AllPurposeEvent;
 import com.nyandev.projecttopaz.ui.settings.SettingsActivity;
-
-import butterknife.BindView;
-import de.greenrobot.event.EventBus;
 
 /**
  * Created by xuan- on 01/03/2018.

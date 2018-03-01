@@ -1,8 +1,6 @@
 package com.nyandev.projecttopaz.ui.weathercard;
 
-import android.support.v7.widget.SearchView;
-
-import com.nyandev.projecttopaz.events.AllPurposeEvent;
+import com.nyandev.projecttopaz.data.events.AllPurposeEvent;
 
 import de.greenrobot.event.EventBus;
 
