@@ -12,11 +12,15 @@ import android.view.ViewGroup;
 
 import com.nyandev.projecttopaz.R;
 import com.nyandev.projecttopaz.adapters.WeatherCardRecyclerAdapter;
+import com.nyandev.projecttopaz.events.AllPurposeEvent;
 import com.nyandev.projecttopaz.utils.SwipeHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
+import de.greenrobot.event.Subscribe;
+import de.greenrobot.event.ThreadMode;
+import hugo.weaving.DebugLog;
 
 /**
  * Created by xuan- on 01/03/2018.
@@ -27,16 +31,19 @@ public class WeatherFragment extends Fragment {
     @BindView(R.id.rv_weatherCard)
     RecyclerView recyclerView;
 
-    private WeatherPresenter mPresenter;
+    private WeatherFragmentPresenter mPresenter;
     LinearLayoutManager linearLayoutManager;
     WeatherCardRecyclerAdapter weatherCardRecyclerAdapter;
 
     @Nullable
     @Override
+    @DebugLog
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_weather_card, container, false);
+        View view = inflater.inflate(R.layout.fragment_weather_card, container, false);
+        return view;
     }
 
+    @DebugLog
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -44,12 +51,30 @@ public class WeatherFragment extends Fragment {
         initView(view);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    // This method will be called when an event is posted
+    @Subscribe(threadMode = ThreadMode.MainThread, sticky = true)
+    public void onMessageEvent(AllPurposeEvent event){
+            mPresenter.fetchWeatherCity(event.getMessage());
+            weatherCardRecyclerAdapter.notifyDataSetChanged();
+    }
 
     public void initView(View view){
         linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
         weatherCardRecyclerAdapter = new WeatherCardRecyclerAdapter(view.getContext());
-        mPresenter = new WeatherPresenter(weatherCardRecyclerAdapter);
+        mPresenter = new WeatherFragmentPresenter(view.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(mPresenter.weatherCardRecyclerAdapter);
 
@@ -57,6 +82,5 @@ public class WeatherFragment extends Fragment {
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerView);
     }
-
 
 }

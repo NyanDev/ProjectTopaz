@@ -1,5 +1,6 @@
 package com.nyandev.projecttopaz.ui.weathercard;
 
+import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.ListViewCompat;
 import android.support.v7.widget.RecyclerView;
@@ -14,11 +15,13 @@ import com.nyandev.projecttopaz.utils.NetworkRequest;
 
 import java.util.ArrayList;
 
+import hugo.weaving.DebugLog;
+
 /**
  * Created by xuan- on 01/03/2018.
  */
 
-public class WeatherPresenter {
+public class WeatherFragmentPresenter {
 
     final static String WEATHER_BASE_URL = "http://api.openweathermap.org/data/2.5/";
     final WeatherService weatherService = SharedApp.getInstance().getRetrofit().create(WeatherService.class);
@@ -26,12 +29,14 @@ public class WeatherPresenter {
     public String apiKey = "56f39e475af4af7888645b0a20f3ae03";
 
     WeatherCardRecyclerAdapter weatherCardRecyclerAdapter;
+    Context context;
 
-
-    public WeatherPresenter(WeatherCardRecyclerAdapter adapter){
-        this.weatherCardRecyclerAdapter = adapter;
+    public WeatherFragmentPresenter(Context context){
+        this.context = context;
+        weatherCardRecyclerAdapter = new WeatherCardRecyclerAdapter(context);
     }
 
+    @DebugLog
     public void fetchWeatherCity(final String city){
         NetworkRequest.perform(weatherService.fetchWeatherForCity(city, apiKey), weatherInfo -> {
             weatherCardRecyclerAdapter.addWeather(weatherInfo);
