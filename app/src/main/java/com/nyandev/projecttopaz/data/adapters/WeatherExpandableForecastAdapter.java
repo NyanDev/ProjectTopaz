@@ -1,4 +1,4 @@
-package com.nyandev.projecttopaz.adapters;
+package com.nyandev.projecttopaz.data.adapters;
 
 import android.content.Context;
 import android.content.SharedPreferences;

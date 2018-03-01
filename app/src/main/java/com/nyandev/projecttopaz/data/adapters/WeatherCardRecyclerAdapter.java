@@ -1,4 +1,4 @@
-package com.nyandev.projecttopaz.adapters;
+package com.nyandev.projecttopaz.data.adapters;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -24,6 +24,7 @@ import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import hugo.weaving.DebugLog;
 
 /**
  * Created by xuan- on 26/08/2017.
@@ -48,6 +49,7 @@ public class WeatherCardRecyclerAdapter extends RecyclerView.Adapter<WeatherCard
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
+    @DebugLog
     public void addWeather(WeatherInfo weatherInfo){
         String location = weatherInfo.getName();
         if (!locations.contains(location)) {
@@ -58,12 +60,14 @@ public class WeatherCardRecyclerAdapter extends RecyclerView.Adapter<WeatherCard
         notifyDataSetChanged();
     }
 
+    @DebugLog
     public void clearWeather(){
         weatherInfos.clear();
         locations.clear();
         notifyDataSetChanged();
     }
 
+    @DebugLog
     public void removeWeather(int position){
         weatherInfos.remove(position);
         locations.remove(position);
@@ -71,15 +75,18 @@ public class WeatherCardRecyclerAdapter extends RecyclerView.Adapter<WeatherCard
         notifyItemRemoved(position);
     }
 
+    @DebugLog
     public WeatherInfo getWeatherInfo(int position){
         return weatherInfos.get(position);
     }
 
+    @DebugLog
     public void setWeatherInfo( int position, WeatherInfo weatherInfo){
         weatherInfos.set(position, weatherInfo);
         notifyItemChanged(position);
     }
 
+    @DebugLog
     public void addWeatherForecast(int position, ArrayList<WeatherDay> weatherForecast){
         weatherForecasts.get(position).clearForecast();
         weatherForecasts.get(position).addWeatherForecast(weatherForecast);
@@ -177,6 +184,7 @@ public class WeatherCardRecyclerAdapter extends RecyclerView.Adapter<WeatherCard
             ButterKnife.bind(this, itemView);
             final ExpandableLayout expandableLayout = (ExpandableLayout) itemView.findViewById(R.id.cardItemForecastExpansion);
             weatherCard.setOnClickListener(new View.OnClickListener() {
+                @DebugLog
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
