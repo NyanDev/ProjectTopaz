@@ -3,7 +3,7 @@ package com.nyandev.projecttopaz.utils;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
-import com.nyandev.projecttopaz.adapters.WeatherCardRecyclerAdapter;
+import com.nyandev.projecttopaz.data.adapters.WeatherCardRecyclerAdapter;
 
 /**
  * Created by xuan- on 26/08/2017.

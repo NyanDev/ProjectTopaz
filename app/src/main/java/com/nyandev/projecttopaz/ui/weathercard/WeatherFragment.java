@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nyandev.projecttopaz.R;
-import com.nyandev.projecttopaz.adapters.WeatherCardRecyclerAdapter;
+import com.nyandev.projecttopaz.data.adapters.WeatherCardRecyclerAdapter;
 import com.nyandev.projecttopaz.data.events.AllPurposeEvent;
 import com.nyandev.projecttopaz.utils.SwipeHelper;
 

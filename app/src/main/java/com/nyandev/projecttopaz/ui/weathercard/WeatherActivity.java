@@ -33,7 +33,6 @@ public class WeatherActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
-        PreferenceManager.setDefaultValues(this, R.xml.prefs_main, false);
         weatherActivityPresenter = new WeatherActivityPresenter();
 
         FragmentManager fm = getFragmentManager();
