@@ -20,6 +20,7 @@ import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.firebase.jobdispatcher.RetryStrategy;
 import com.firebase.jobdispatcher.Trigger;
+import com.nyandev.projecttopaz.ui.settings.SettingsActivity;
 
 import de.greenrobot.event.EventBus;
 
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // ensure that we set all the default value from preference manager
+        PreferenceManager.setDefaultValues(this, R.xml.prefs_main, false);
 
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
@@ -61,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
                         .setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL)
                         .build()
         );
+
+
     }
 
     @Override
