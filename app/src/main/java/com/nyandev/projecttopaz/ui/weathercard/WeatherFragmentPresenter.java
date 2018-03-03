@@ -2,7 +2,6 @@ package com.nyandev.projecttopaz.ui.weathercard;
 
 import android.content.Context;
 
-import com.nyandev.projecttopaz.SharedApp;
 import com.nyandev.projecttopaz.data.adapters.WeatherCardRecyclerAdapter;
 import com.nyandev.projecttopaz.data.models.WeatherDay;
 import com.nyandev.projecttopaz.data.models.interfaces.WeatherService;
@@ -11,6 +10,9 @@ import com.nyandev.projecttopaz.utils.NetworkRequest;
 import java.util.ArrayList;
 
 import hugo.weaving.DebugLog;
+import retrofit2.Retrofit;
+
+import static com.nyandev.projecttopaz.data.models.interfaces.WeatherService.API_KEY;
 
 /**
  * Created by xuan- on 01/03/2018.
@@ -19,23 +21,27 @@ import hugo.weaving.DebugLog;
 public class WeatherFragmentPresenter {
 
     final static String WEATHER_BASE_URL = "http://api.openweathermap.org/data/2.5/";
-    final WeatherService weatherService = SharedApp.getInstance().getRetrofit().create(WeatherService.class);
 
-    public String apiKey = "56f39e475af4af7888645b0a20f3ae03";
+    WeatherService weatherService = null;
+
+
 
     WeatherCardRecyclerAdapter weatherCardRecyclerAdapter;
     Context context;
+    Retrofit retrofit;
 
-    public WeatherFragmentPresenter(Context context){
+    public WeatherFragmentPresenter(Context context, Retrofit retrofit){
+        this.retrofit = retrofit;
         this.context = context;
         weatherCardRecyclerAdapter = new WeatherCardRecyclerAdapter(context);
+        weatherService = retrofit.create(WeatherService.class);
     }
 
     @DebugLog
     public void fetchWeatherCity(final String city){
-        NetworkRequest.perform(weatherService.fetchWeatherForCity(city, apiKey), weatherInfo -> {
+        NetworkRequest.perform(weatherService.fetchWeatherForCity(city, API_KEY), weatherInfo -> {
             weatherCardRecyclerAdapter.addWeather(weatherInfo);
-            fetchWeatherForecastsForCityName(weatherCardRecyclerAdapter.getItemCount()-1, city, 5, apiKey);
+            fetchWeatherForecastsForCityName(weatherCardRecyclerAdapter.getItemCount()-1, city, 5, API_KEY);
         });
     }
 
@@ -70,7 +76,7 @@ public class WeatherFragmentPresenter {
             if (city.isEmpty()){
                 return;
             }
-            updateWeatherCity(i, city, apiKey);
+            updateWeatherCity(i, city, API_KEY);
         }
         weatherCardRecyclerAdapter.notifyDataSetChanged();
     }

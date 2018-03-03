@@ -35,6 +35,8 @@ android {
     }
 }
 
+def daggerVersion = '2.+'
+
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -77,5 +79,11 @@ dependencies {
     compile 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
 
     compile 'com.firebase:firebase-jobdispatcher:0.8.2'
+
+    // Dagger 2
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
+    compile "com.google.dagger:dagger:$daggerVersion"
+    compile "com.google.dagger:dagger-android:$daggerVersion"
 
 }
