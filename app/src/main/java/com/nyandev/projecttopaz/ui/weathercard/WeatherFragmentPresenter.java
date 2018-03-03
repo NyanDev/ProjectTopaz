@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.nyandev.projecttopaz.data.adapters.WeatherCardRecyclerAdapter;
 import com.nyandev.projecttopaz.data.models.WeatherDay;
+import com.nyandev.projecttopaz.data.models.WeatherInfo;
 import com.nyandev.projecttopaz.data.models.interfaces.WeatherService;
 import com.nyandev.projecttopaz.utils.NetworkRequest;
 
@@ -22,10 +23,7 @@ public class WeatherFragmentPresenter {
 
     final static String WEATHER_BASE_URL = "http://api.openweathermap.org/data/2.5/";
 
-    WeatherService weatherService = null;
-
-
-
+    WeatherService weatherService;
     WeatherCardRecyclerAdapter weatherCardRecyclerAdapter;
     Context context;
     Retrofit retrofit;
@@ -43,6 +41,15 @@ public class WeatherFragmentPresenter {
             weatherCardRecyclerAdapter.addWeather(weatherInfo);
             fetchWeatherForecastsForCityName(weatherCardRecyclerAdapter.getItemCount()-1, city, 5, API_KEY);
         });
+    }
+
+    @DebugLog
+    public void populateWeatherInDatabase(WeatherInfo weatherInfo){
+
+    }
+
+    public void populateForecastsInDatabase(WeatherDay weatherDay){
+
     }
 
     public void fetchWeatherForecastsForCityName(final int position, String city, int count, String apiKey){
