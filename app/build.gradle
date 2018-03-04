@@ -28,11 +28,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }
+
+        debug {
+            resValue("string", "PORT_NUMBER", "1212")
+        }
     }
+
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
     }
+
 }
 
 def daggerVersion = '2.+'
@@ -44,6 +50,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
     //compile group: 'io.reactivex', name: 'rxandroid', version: '0.24.0'
 
     // menu_main menu
@@ -92,4 +99,6 @@ dependencies {
     compile "com.github.Raizlabs.DBFlow:dbflow-core:$dbflowVersion"
     compile "com.github.Raizlabs.DBFlow:dbflow:$dbflowVersion"
 
+    debugCompile 'com.amitshekhar.android:debug-db:1.0.1'
 }
+

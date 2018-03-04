@@ -2,6 +2,7 @@ package com.nyandev.projecttopaz;
 
 import android.app.Application;
 
+import com.nyandev.projecttopaz.data.models.database.WeatherDatabase;
 import com.nyandev.projecttopaz.di.component.DaggerNetComponent;
 import com.nyandev.projecttopaz.di.component.NetComponent;
 import com.nyandev.projecttopaz.di.module.AppModule;
@@ -31,7 +32,6 @@ public class App extends Application {
         // init DBFlow
         FlowManager.init(new FlowConfig.Builder(this).build());
         FlowLog.setMinimumLoggingLevel(FlowLog.Level.E);
-
     }
 
     public NetComponent getNetComponent(){

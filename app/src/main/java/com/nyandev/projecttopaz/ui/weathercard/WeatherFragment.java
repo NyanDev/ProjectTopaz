@@ -35,9 +35,6 @@ public class WeatherFragment extends Fragment {
     @BindView(R.id.rv_weatherCard)
     RecyclerView recyclerView;
 
-    @Inject
-    Retrofit retrofit;
-
     private WeatherFragmentPresenter mPresenter;
     LinearLayoutManager linearLayoutManager;
     WeatherCardRecyclerAdapter weatherCardRecyclerAdapter;
@@ -47,7 +44,6 @@ public class WeatherFragment extends Fragment {
     @DebugLog
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weather_card, container, false);
-        ((App)getActivity().getApplicationContext()).getNetComponent().inject(this);
         return view;
     }
 
@@ -82,7 +78,7 @@ public class WeatherFragment extends Fragment {
         linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
         weatherCardRecyclerAdapter = new WeatherCardRecyclerAdapter(view.getContext());
-        mPresenter = new WeatherFragmentPresenter(view.getContext(), retrofit);
+        mPresenter = new WeatherFragmentPresenter(view.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(mPresenter.weatherCardRecyclerAdapter);
 
