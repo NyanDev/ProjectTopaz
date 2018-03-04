@@ -1,22 +1,40 @@
 # ProjectTopaz
-An opensource weather app mostly for learning purpose, work is in progress
+An opensource weather app mostly for learning purpose, work is in progress...
 
-
+# Update
+  ## 04/03/2018
+    - Migrated the code to Model-View-Presenter (MVP) pattern 
+    - Implemented Dependency Injection with Dagger 2
+    - Added data persistence with a local Databse using DB Flow 
+    - Optimize call on API
+    - Fixed some minor bugs on display
+ 
+# Evolution to come
+  - Implement the strict MVP pattern
+  - Add UI test with espresso ( or other tools )
+  - Change the UI to make it more user friendly
+  - Create a Restful API to proxify the call towards the openweathermap API ( have to find the language to work with )
+  - Handle a database on the remote Restful API to synchronize with multiple devices
+  - ... 
+  
 # Developpement
 The app was developped with:
 
   - Android Studio
-  - EventBus
-  - Retrofit
-  - RxAndroid
-  - ButterKnife
+  - [EventBus](https://github.com/greenrobot/EventBus)
+  - [Retrofit](http://square.github.io/retrofit/)
+  - [Gson](https://github.com/square/retrofit/tree/master/retrofit-converters/gson)
+  - [RxAndroid](https://github.com/ReactiveX/RxAndroid/)
+  - [ButterKnife](http://jakewharton.github.io/butterknife/)
+  - MVP pattern
+  - [Dagger2  (DI)](https://google.github.io/dagger/)
+  - [DB Flow](https://github.com/Raizlabs/DBFlow)
+  - [Android Debug Database ](https://github.com/amitshekhariitbhu/Android-Debug-Database)
 
 # Screenshot
 
 ![list of cardview](https://i.imgur.com/6jt21jgl.png "1st")
 ![expanded cardview](https://i.imgur.com/wbAPxJgl.png "2nd")
-
-  
 
 
 # License
