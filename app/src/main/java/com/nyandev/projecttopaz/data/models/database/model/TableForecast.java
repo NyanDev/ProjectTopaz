@@ -30,6 +30,9 @@ public class TableForecast extends BaseModel {
     @Column
     double temperature;
 
+    @Column
+    int icon;
+
     public int getId() {
         return id;
     }
@@ -60,5 +63,13 @@ public class TableForecast extends BaseModel {
 
     public void setTemperature(double temperature) {
         this.temperature = temperature;
+    }
+
+    public int getIcon() {
+        return icon;
+    }
+
+    public void setIcon(int icon) {
+        this.icon = icon;
     }
 }

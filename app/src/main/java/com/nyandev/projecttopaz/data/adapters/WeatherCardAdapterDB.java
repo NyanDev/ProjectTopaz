@@ -12,15 +12,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.nyandev.projecttopaz.R;
-import com.nyandev.projecttopaz.data.models.WeatherDay;
-import com.nyandev.projecttopaz.data.models.WeatherInfo;
+import com.nyandev.projecttopaz.data.models.database.model.TableForecast;
+import com.nyandev.projecttopaz.data.models.database.model.TableWeather;
 import com.nyandev.projecttopaz.utils.Utility;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,63 +35,40 @@ import hugo.weaving.DebugLog;
 public class WeatherCardAdapterDB extends RecyclerView.Adapter<WeatherCardAdapterDB.ViewHolder>{
 
     private Context context;
-    private ArrayList<WeatherInfo> weatherInfos = new ArrayList<>();
-    private ArrayList<String> locations = new ArrayList<>();
     private LayoutInflater inflater = null;
-    private ArrayList<WeatherExpandableForecastAdapter> weatherForecasts = new ArrayList<>();
+    private List<TableWeather> tableWeathers = new ArrayList<>();
+    private List<TableForecast> tableForecasts = new ArrayList<>();
+    private WeatherCardForecastDB weatherCardForecastDB;
 
     public WeatherCardAdapterDB(Context context){
         this.context = context;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    }
+        tableWeathers = SQLite.select()
+                .from(TableWeather.class)
+                .queryList();
 
-    public WeatherCardAdapterDB(Context context, ArrayList<WeatherInfo> weatherInfos){
-        this.context = context;
-        this.weatherInfos = weatherInfos;
-        this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    }
-
-    @DebugLog
-    public void addWeather(WeatherInfo weatherInfo){
-        String location = weatherInfo.getName();
-        if (!locations.contains(location)) {
-            weatherInfos.add(weatherInfo);
-            locations.add(location);
-            weatherForecasts.add(new WeatherExpandableForecastAdapter(context));
-        }
-        notifyDataSetChanged();
     }
 
     @DebugLog
-    public void clearWeather(){
-        weatherInfos.clear();
-        locations.clear();
+    public void updateWeather(){
+        tableWeathers = SQLite.select()
+                .from(TableWeather.class)
+                .queryList();
+        weatherCardForecastDB.updateForecast();
         notifyDataSetChanged();
     }
 
     @DebugLog
     public void removeWeather(int position){
-        weatherInfos.remove(position);
-        locations.remove(position);
-        weatherForecasts.remove(position);
+        TableWeather tableWeather = tableWeathers.get(position);
+        tableWeathers.remove(tableWeather);
+        tableWeather.delete();
         notifyItemRemoved(position);
     }
 
     @DebugLog
-    public WeatherInfo getWeatherInfo(int position){
-        return weatherInfos.get(position);
-    }
-
-    @DebugLog
-    public void setWeatherInfo( int position, WeatherInfo weatherInfo){
-        weatherInfos.set(position, weatherInfo);
-        notifyItemChanged(position);
-    }
-
-    @DebugLog
-    public void addWeatherForecast(int position, ArrayList<WeatherDay> weatherForecast){
-        weatherForecasts.get(position).clearForecast();
-        weatherForecasts.get(position).addWeatherForecast(weatherForecast);
+    public TableWeather getWeatherInfo(int position){
+        return tableWeathers.get(position);
     }
 
     @Override
@@ -101,61 +80,62 @@ public class WeatherCardAdapterDB extends RecyclerView.Adapter<WeatherCardAdapte
 
     @Override
     public void onBindViewHolder(final WeatherCardAdapterDB.ViewHolder holder, final int position) {
-        final WeatherInfo weatherInfo = weatherInfos.get(position);
+        final TableWeather tableWeather = tableWeathers.get(position);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         holder.lastUpdate = new Date();
 
-
         // ---------- weather day -------------
-        Date date = new Date(weatherInfo.getDt() * 1000);
+        Date date = new Date(tableWeather.getDay() * 1000);
         String pattern = "EEEE";
         SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
         String dateString = dateFormat.format(date);
         holder.cardItemDay.setText(dateString);
 
         // ---------- weather city -------------
-        holder.cardItemLocation.setText(weatherInfo.getName());
+        holder.cardItemLocation.setText(tableWeather.getCityName());
 
         // ---------- weather icon -------------
-        String weatherId = "wi_owm_" + Integer.toString(weatherInfo.getWeatherList().get(0).getId());
+        String weatherId = "wi_owm_" + Integer.toString(tableWeather.getIcon());
         holder.cardItemIcon.setText(context.getResources().getIdentifier(weatherId, "string", context.getPackageName()));
 
         // ---------- weather temperature -------------
-        double mainTemp = Utility.convertTemperature((float)weatherInfo.getMain().getTemp(), sharedPreferences);
+        double mainTemp = Utility.convertTemperature((float)tableWeather.getTemperature(), sharedPreferences);
         String tempUnit = sharedPreferences.getString("temperatureUnit", "°C");
         holder.cardItemTemperature.setText(String.format("%.1f %s", mainTemp, tempUnit));
 
         // ---------- weather description -------------
-        holder.cardItemDescription.setText(weatherInfo.getWeatherList().get(0).getDescription());
+        holder.cardItemDescription.setText(tableWeather.getDescription());
 
         // ---------- weather wind  -------------
 
-        float windSpeed = Utility.convertWindSpeed((float)weatherInfo.getWind().getSpeed(), sharedPreferences);
+        float windSpeed = Utility.convertWindSpeed((float)tableWeather.getWindSpeed(), sharedPreferences);
         String speedUnit = sharedPreferences.getString("speedUnit", "m/s");
         holder.cardItemWind.setText(String.format("%.1f %s", windSpeed, speedUnit));
 
-        String windDirectionString = "wi_direction_" + Utility.windDegreeToDirection(weatherInfo.getWind().getDeg());
+        String windDirectionString = "wi_direction_" + Utility.windDegreeToDirection(tableWeather.getWindDegree());
         holder.cardItemWindDirection.setText(context.getResources().getIdentifier(windDirectionString, "string", context.getPackageName()));
 
         // ---------- weather pressure  -------------
 
-        float pressure = Utility.convertPressure((float)weatherInfo.getMain().getPressure(), sharedPreferences);
+        float pressure = Utility.convertPressure((float)tableWeather.getPressure(), sharedPreferences);
         String pressureUnit = sharedPreferences.getString("pressureUnit"," hPa");
         holder.cardItemPressure.setText(String.format("%.1f %s", pressure, pressureUnit));
 
         // ---------- weather humidity  -------------
 
-        float humidity = (float)weatherInfo.getMain().getHumidity();
+        float humidity = (float)tableWeather.getHumidity();
         holder.cardItemHumidity.setText(String.format("%s", humidity));
 
         // ---------- weather expandable layout -------------
-        holder.lv_forecast.setAdapter(weatherForecasts.get(position));
+        tableForecasts = tableWeather.getForecasts();
+        weatherCardForecastDB = new WeatherCardForecastDB(context, tableWeather);
+        holder.lv_forecast.setAdapter(weatherCardForecastDB);
 
     }
 
     @Override
     public int getItemCount() {
-        return weatherInfos.size();
+        return tableWeathers.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

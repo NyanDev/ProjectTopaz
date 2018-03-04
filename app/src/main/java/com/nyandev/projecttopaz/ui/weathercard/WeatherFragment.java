@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.nyandev.projecttopaz.App;
 import com.nyandev.projecttopaz.R;
+import com.nyandev.projecttopaz.data.adapters.WeatherCardAdapterDB;
 import com.nyandev.projecttopaz.data.adapters.WeatherCardRecyclerAdapter;
 import com.nyandev.projecttopaz.data.events.AllPurposeEvent;
 import com.nyandev.projecttopaz.utils.SwipeHelper;
@@ -37,7 +38,6 @@ public class WeatherFragment extends Fragment {
 
     private WeatherFragmentPresenter mPresenter;
     LinearLayoutManager linearLayoutManager;
-    WeatherCardRecyclerAdapter weatherCardRecyclerAdapter;
 
     @Nullable
     @Override
@@ -70,19 +70,18 @@ public class WeatherFragment extends Fragment {
     // This method will be called when an event is posted
     @Subscribe(threadMode = ThreadMode.MainThread, sticky = true)
     public void onMessageEvent(AllPurposeEvent event){
-            mPresenter.fetchWeatherCity(event.getMessage());
-            weatherCardRecyclerAdapter.notifyDataSetChanged();
+        mPresenter.fetchWeatherCity(event.getMessage());
+        mPresenter.weatherCardAdapterDB.updateWeather();
     }
 
     public void initView(View view){
         linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
-        weatherCardRecyclerAdapter = new WeatherCardRecyclerAdapter(view.getContext());
         mPresenter = new WeatherFragmentPresenter(view.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(mPresenter.weatherCardRecyclerAdapter);
+        recyclerView.setAdapter(mPresenter.weatherCardAdapterDB);
 
-        ItemTouchHelper.Callback callback = new SwipeHelper(weatherCardRecyclerAdapter);
+        ItemTouchHelper.Callback callback = new SwipeHelper(mPresenter.weatherCardAdapterDB);
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerView);
     }

@@ -1,8 +1,10 @@
 package com.nyandev.projecttopaz.ui.weathercard;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.nyandev.projecttopaz.App;
+import com.nyandev.projecttopaz.data.adapters.WeatherCardAdapterDB;
 import com.nyandev.projecttopaz.data.adapters.WeatherCardRecyclerAdapter;
 import com.nyandev.projecttopaz.data.models.WeatherDay;
 import com.nyandev.projecttopaz.data.models.WeatherForecast;
@@ -29,27 +31,37 @@ import static com.nyandev.projecttopaz.data.models.interfaces.WeatherService.API
 
 public class WeatherFragmentPresenter {
 
-    final static String WEATHER_BASE_URL = "http://api.openweathermap.org/data/2.5/";
-
     @Inject
     Retrofit retrofit;
     WeatherService weatherService;
     WeatherCardRecyclerAdapter weatherCardRecyclerAdapter;
+    WeatherCardAdapterDB weatherCardAdapterDB;
     Context context;
 
     public WeatherFragmentPresenter(Context context){
         ((App)context.getApplicationContext()).getNetComponent().inject(this);
         this.context = context;
         weatherCardRecyclerAdapter = new WeatherCardRecyclerAdapter(context);
+        weatherCardAdapterDB = new WeatherCardAdapterDB(context);
         weatherService = retrofit.create(WeatherService.class);
     }
 
     @DebugLog
     public void fetchWeatherCity(final String city){
-        NetworkRequest.perform(weatherService.fetchWeatherForCity(city, API_KEY), weatherInfo -> {
-            weatherCardRecyclerAdapter.addWeather(weatherInfo);
-            populateWeatherInDatabase(city, weatherInfo);
-            fetchWeatherForecastsForCityName(weatherCardRecyclerAdapter.getItemCount()-1, city, 5, API_KEY);
+        boolean exist = isWeatherInDatabase(city);
+        if (!exist) {
+            NetworkRequest.perform(weatherService.fetchWeatherForCity(city, API_KEY), weatherInfo -> {
+                populateWeatherInDatabase(city, weatherInfo, exist);
+                fetchWeatherForecastsForCityName(city, 5, API_KEY);
+                weatherCardAdapterDB.updateWeather();
+            });
+        }
+    }
+
+    @DebugLog
+    public void fetchWeatherForecastsForCityName(String city, int count, String apiKey){
+        NetworkRequest.perform(weatherService.fetchWeatherForecastsForCityName(city, count, apiKey), weatherForecast -> {
+            populateForecastsInDatabase(city, weatherForecast);
         });
     }
 
@@ -75,34 +87,38 @@ public class WeatherFragmentPresenter {
     }
 
     @DebugLog
-    public void populateWeatherInDatabase(String city, WeatherInfo weatherInfo){
-        if (isWeatherInDatabase(city)){
-            long day = weatherInfo.getDt();
-            TableWeather tableWeather = new TableWeather();
+    public void populateWeatherInDatabase(String city, WeatherInfo weatherInfo, boolean exist){
+        TableWeather tableWeather = new TableWeather();
+        long day;
+        if (exist) {
+            day = weatherInfo.getDt();
             if (!isWeatherUpToDate(city, day)) {
                 tableWeather = SQLite.select()
                         .from(TableWeather.class)
                         .where(TableWeather_Table.cityName.eq(city))
                         .querySingle();
             }
-
-            int icon = weatherInfo.getWeatherList().get(0).getId();
-            String description = weatherInfo.getWeatherList().get(0).getDescription();
-            double wSpeed = weatherInfo.getWind().getSpeed();
-            double wDegree = weatherInfo.getWind().getDeg();
-            double pressure = weatherInfo.getMain().getPressure();
-            double humidity = weatherInfo.getMain().getHumidity();
-
-            tableWeather.setDay(day);
-            tableWeather.setCityName(city);
-            tableWeather.setIcon(icon);
-            tableWeather.setDescription(description);
-            tableWeather.setWindSpeed(wSpeed);
-            tableWeather.setWindDegree(wDegree);
-            tableWeather.setPressure(pressure);
-            tableWeather.setHumidity(humidity);
-            tableWeather.save();
         }
+
+        day = weatherInfo.getDt();
+        int icon = weatherInfo.getWeatherList().get(0).getId();
+        String description = weatherInfo.getWeatherList().get(0).getDescription();
+        double wSpeed = weatherInfo.getWind().getSpeed();
+        double wDegree = weatherInfo.getWind().getDeg();
+        double pressure = weatherInfo.getMain().getPressure();
+        double humidity = weatherInfo.getMain().getHumidity();
+        double temperature = weatherInfo.getMain().getTemp();
+
+        tableWeather.setDay(day);
+        tableWeather.setCityName(city);
+        tableWeather.setIcon(icon);
+        tableWeather.setDescription(description);
+        tableWeather.setWindSpeed(wSpeed);
+        tableWeather.setWindDegree(wDegree);
+        tableWeather.setPressure(pressure);
+        tableWeather.setHumidity(humidity);
+        tableWeather.setTemperature(temperature);
+        tableWeather.save();
     }
 
     @DebugLog
@@ -118,45 +134,9 @@ public class WeatherFragmentPresenter {
             tableForecast.setDay(weatherDay.getDt());
             tableForecast.setWeatherId(weatherId);
             tableForecast.setTemperature(weatherDay.getTemp().getDay());
+            tableForecast.setIcon(weatherDay.getWeather().get(0).getId());
             tableForecast.save();
         }
     }
 
-    @DebugLog
-    public void fetchWeatherForecastsForCityName(final int position, String city, int count, String apiKey){
-        NetworkRequest.perform(weatherService.fetchWeatherForecastsForCityName(city, count, apiKey), weatherForecast -> {
-            ArrayList<WeatherDay> weatherDays = new ArrayList<>();
-            for (int i = 1; i < weatherForecast.getDays().size(); i++) {
-                weatherDays.add(weatherForecast.getDays().get(i));
-            }
-            populateForecastsInDatabase(city, weatherForecast);
-            weatherCardRecyclerAdapter.addWeatherForecast(position, weatherDays);
-        });
-    }
-
-    public void fetchWeatherCityWithGeoCoord(final double lat, final double lon, final String apiKey){
-        NetworkRequest.perform(weatherService.fetchWeatherWithGeoCoord(lat, lon, apiKey), weatherInfo -> {
-            weatherCardRecyclerAdapter.addWeather(weatherInfo);
-            fetchWeatherForecastsForCityName(weatherCardRecyclerAdapter.getItemCount()-1, weatherInfo.getName(), 5, apiKey);
-        });
-    }
-
-    public void updateWeatherCity(final int position, final String city, final String apiKey){
-        NetworkRequest.perform(weatherService.fetchWeatherForCity(city, apiKey), weatherInfo -> {
-            weatherCardRecyclerAdapter.setWeatherInfo(position, weatherInfo);
-            fetchWeatherForecastsForCityName(weatherCardRecyclerAdapter.getItemCount()-1, city, 5, apiKey);
-        });
-    }
-
-    public void updateWeatherCard(){
-        String city;
-        for (int i = 0; i < weatherCardRecyclerAdapter.getItemCount(); i++){
-            city = weatherCardRecyclerAdapter.getWeatherInfo(i).getName();
-            if (city.isEmpty()){
-                return;
-            }
-            updateWeatherCity(i, city, API_KEY);
-        }
-        weatherCardRecyclerAdapter.notifyDataSetChanged();
-    }
 }

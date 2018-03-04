@@ -33,6 +33,9 @@ public class TableWeather extends BaseModel {
     int icon;
 
     @Column
+    double temperature;
+
+    @Column
     double pressure;
 
     @Column
@@ -131,5 +134,13 @@ public class TableWeather extends BaseModel {
 
     public void setForecasts(List<TableForecast> forecasts) {
         this.forecasts = forecasts;
+    }
+
+    public double getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(double temperature) {
+        this.temperature = temperature;
     }
 }

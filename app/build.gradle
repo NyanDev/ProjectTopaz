@@ -30,7 +30,7 @@ android {
         }
 
         debug {
-            resValue("string", "PORT_NUMBER", "1212")
+            resValue("string", "PORT_NUMBER", "1313")
         }
     }
 

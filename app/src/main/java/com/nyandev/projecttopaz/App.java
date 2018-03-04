@@ -18,7 +18,6 @@ import com.raizlabs.android.dbflow.config.FlowManager;
 public class App extends Application {
     private NetComponent mNetComponent;
     final static String WEATHER_BASE_URL = "http://api.openweathermap.org/data/2.5/";
-    final static String API_KEY = "56f39e475af4af7888645b0a20f3ae03";
 
     @Override
     public void onCreate() {
@@ -32,6 +31,8 @@ public class App extends Application {
         // init DBFlow
         FlowManager.init(new FlowConfig.Builder(this).build());
         FlowLog.setMinimumLoggingLevel(FlowLog.Level.E);
+        //FlowManager.getDatabase(WeatherDatabase.class).reset(this);
+
     }
 
     public NetComponent getNetComponent(){
