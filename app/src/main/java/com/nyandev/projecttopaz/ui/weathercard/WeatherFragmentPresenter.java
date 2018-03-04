@@ -16,8 +16,6 @@ import com.nyandev.projecttopaz.data.models.interfaces.WeatherService;
 import com.nyandev.projecttopaz.utils.NetworkRequest;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
-import java.util.ArrayList;
-
 import javax.inject.Inject;
 
 import hugo.weaving.DebugLog;
@@ -54,7 +52,11 @@ public class WeatherFragmentPresenter {
                 populateWeatherInDatabase(city, weatherInfo, exist);
                 fetchWeatherForecastsForCityName(city, 5, API_KEY);
                 weatherCardAdapterDB.updateWeather();
+            }, error -> {
+                Toast.makeText(context, "City not found", Toast.LENGTH_SHORT).show();
             });
+        } else {
+            Toast.makeText(context, "City is already in the list", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -67,12 +69,10 @@ public class WeatherFragmentPresenter {
 
     public boolean isWeatherInDatabase(String city){
         boolean isInBase;
-
         isInBase = SQLite.select()
                 .from(TableWeather.class)
                 .where(TableWeather_Table.cityName.eq(city))
                 .count() > 0;
-
         return isInBase;
     }
 
@@ -82,7 +82,6 @@ public class WeatherFragmentPresenter {
                 .from(TableWeather.class)
                 .where(TableWeather_Table.cityName.eq(city))
                 .querySingle().getDay();
-
         return (Math.abs(day) - Math.abs(wDay) <= 2 * 60 * 60 * 1000); // update frequency of openweathermap
     }
 
@@ -138,5 +137,6 @@ public class WeatherFragmentPresenter {
             tableForecast.save();
         }
     }
+
 
 }

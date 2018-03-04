@@ -54,8 +54,12 @@ public class WeatherCardAdapterDB extends RecyclerView.Adapter<WeatherCardAdapte
         tableWeathers = SQLite.select()
                 .from(TableWeather.class)
                 .queryList();
-        weatherCardForecastDB.updateForecast();
+        updateForecasts();
         notifyDataSetChanged();
+    }
+
+    public void updateForecasts(){
+        weatherCardForecastDB.updateForecast();
     }
 
     @DebugLog
@@ -173,6 +177,7 @@ public class WeatherCardAdapterDB extends RecyclerView.Adapter<WeatherCardAdapte
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     expandableLayout.toggle();
+                    updateForecasts();
                 }
             });
         }

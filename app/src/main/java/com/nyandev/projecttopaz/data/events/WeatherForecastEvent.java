@@ -5,17 +5,5 @@ package com.nyandev.projecttopaz.data.events;
  */
 
 public class WeatherForecastEvent {
-    private final int position;
-    private final String location;
 
-    public WeatherForecastEvent(int position, String location) {
-        this.position = position;
-        this.location = location;
-    }
-
-    public int getPosition(){
-        return position;
-    }
-
-    public String getLocation(){ return location; }
 }

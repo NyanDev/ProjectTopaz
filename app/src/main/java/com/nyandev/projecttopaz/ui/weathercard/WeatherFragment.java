@@ -10,14 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.nyandev.projecttopaz.App;
 import com.nyandev.projecttopaz.R;
-import com.nyandev.projecttopaz.data.adapters.WeatherCardAdapterDB;
-import com.nyandev.projecttopaz.data.adapters.WeatherCardRecyclerAdapter;
 import com.nyandev.projecttopaz.data.events.AllPurposeEvent;
 import com.nyandev.projecttopaz.utils.SwipeHelper;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,7 +20,6 @@ import de.greenrobot.event.EventBus;
 import de.greenrobot.event.Subscribe;
 import de.greenrobot.event.ThreadMode;
 import hugo.weaving.DebugLog;
-import retrofit2.Retrofit;
 
 /**
  * Created by xuan- on 01/03/2018.

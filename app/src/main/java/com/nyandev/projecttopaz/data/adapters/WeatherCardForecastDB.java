@@ -30,7 +30,7 @@ import hugo.weaving.DebugLog;
 public class WeatherCardForecastDB extends BaseAdapter {
 
     Context context;
-    List<TableForecast> tableForecasts = new ArrayList<>();
+    List<TableForecast> tableForecasts = null;
     TableWeather tableWeather;
     private LayoutInflater layoutInflater = null;
 
@@ -42,13 +42,13 @@ public class WeatherCardForecastDB extends BaseAdapter {
         this.context = context;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.tableWeather = tableWeather;
+        tableForecasts = new ArrayList<>();
         updateForecast();
     }
 
     @DebugLog
     public void updateForecast(){
         tableForecasts = tableWeather.getForecasts();
-        notifyDataSetChanged();
     }
 
 
