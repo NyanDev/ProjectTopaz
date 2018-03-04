@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.nyandev.projecttopaz.R;
-import com.nyandev.projecttopaz.data.models.database.model.TableForecast;
-import com.nyandev.projecttopaz.data.models.database.model.TableWeather;
+import com.nyandev.projecttopaz.data.database.model.TableForecast;
+import com.nyandev.projecttopaz.data.database.model.TableWeather;
 import com.nyandev.projecttopaz.utils.Utility;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 

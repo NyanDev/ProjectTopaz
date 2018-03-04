@@ -77,7 +77,6 @@ public class WeatherActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                displayToast("onQueryTextSubmit: " + query);
                 weatherActivityPresenter.onQuerySubmit(query);
                 searchView.setQuery("", false);
                 searchView.setIconified(true);

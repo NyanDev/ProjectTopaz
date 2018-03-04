@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import com.nyandev.projecttopaz.R;
 import com.nyandev.projecttopaz.customViews.CustomFontTextView;
-import com.nyandev.projecttopaz.data.models.database.model.TableForecast;
-import com.nyandev.projecttopaz.data.models.database.model.TableWeather;
+import com.nyandev.projecttopaz.data.database.model.TableForecast;
+import com.nyandev.projecttopaz.data.database.model.TableWeather;
 import com.nyandev.projecttopaz.utils.Utility;
 
 import java.text.SimpleDateFormat;

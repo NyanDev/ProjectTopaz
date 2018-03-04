@@ -2,7 +2,6 @@ package com.nyandev.projecttopaz;
 
 import android.app.Application;
 
-import com.nyandev.projecttopaz.data.models.database.WeatherDatabase;
 import com.nyandev.projecttopaz.di.component.DaggerNetComponent;
 import com.nyandev.projecttopaz.di.component.NetComponent;
 import com.nyandev.projecttopaz.di.module.AppModule;

@@ -6,13 +6,13 @@ import android.widget.Toast;
 import com.nyandev.projecttopaz.App;
 import com.nyandev.projecttopaz.data.adapters.WeatherCardAdapterDB;
 import com.nyandev.projecttopaz.data.adapters.WeatherCardRecyclerAdapter;
-import com.nyandev.projecttopaz.data.models.WeatherDay;
-import com.nyandev.projecttopaz.data.models.WeatherForecast;
-import com.nyandev.projecttopaz.data.models.WeatherInfo;
-import com.nyandev.projecttopaz.data.models.database.model.TableForecast;
-import com.nyandev.projecttopaz.data.models.database.model.TableWeather;
-import com.nyandev.projecttopaz.data.models.database.model.TableWeather_Table;
-import com.nyandev.projecttopaz.data.models.interfaces.WeatherService;
+import com.nyandev.projecttopaz.data.api.WeatherDay;
+import com.nyandev.projecttopaz.data.api.WeatherForecast;
+import com.nyandev.projecttopaz.data.api.WeatherInfo;
+import com.nyandev.projecttopaz.data.database.model.TableForecast;
+import com.nyandev.projecttopaz.data.database.model.TableWeather;
+import com.nyandev.projecttopaz.data.database.model.TableWeather_Table;
+import com.nyandev.projecttopaz.data.api.interfaces.WeatherService;
 import com.nyandev.projecttopaz.utils.NetworkRequest;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
@@ -21,7 +21,7 @@ import javax.inject.Inject;
 import hugo.weaving.DebugLog;
 import retrofit2.Retrofit;
 
-import static com.nyandev.projecttopaz.data.models.interfaces.WeatherService.API_KEY;
+import static com.nyandev.projecttopaz.data.api.interfaces.WeatherService.API_KEY;
 
 /**
  * Created by xuan- on 01/03/2018.

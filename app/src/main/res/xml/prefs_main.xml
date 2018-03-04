@@ -26,12 +26,13 @@
             android:title="@string/settings_pressure" />
     </PreferenceCategory>
 
+    <!--
     <PreferenceCategory android:title="@string/settings_title_user_extra">
         <Preference
             android:title="About"
-            android:key="@string/settings_about"/>
+            android:key="@string/settings_about" />
         </PreferenceCategory>
-
+    -->
 
 
 

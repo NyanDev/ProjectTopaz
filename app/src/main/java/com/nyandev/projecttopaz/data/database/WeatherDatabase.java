@@ -1,4 +1,4 @@
-package com.nyandev.projecttopaz.data.models.database;
+package com.nyandev.projecttopaz.data.database;
 
 import com.raizlabs.android.dbflow.annotation.Database;
 

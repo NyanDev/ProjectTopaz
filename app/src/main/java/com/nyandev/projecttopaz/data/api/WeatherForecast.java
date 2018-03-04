@@ -1,4 +1,4 @@
-package com.nyandev.projecttopaz.data.models;
+package com.nyandev.projecttopaz.data.api;
 
 import com.google.gson.annotations.SerializedName;
 

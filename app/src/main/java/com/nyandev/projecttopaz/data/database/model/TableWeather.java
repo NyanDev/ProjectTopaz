@@ -1,6 +1,6 @@
-package com.nyandev.projecttopaz.data.models.database.model;
+package com.nyandev.projecttopaz.data.database.model;
 
-import com.nyandev.projecttopaz.data.models.database.WeatherDatabase;
+import com.nyandev.projecttopaz.data.database.WeatherDatabase;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.OneToMany;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;

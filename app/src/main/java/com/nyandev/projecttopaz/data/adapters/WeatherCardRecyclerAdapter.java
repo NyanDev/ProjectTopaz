@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.nyandev.projecttopaz.R;
-import com.nyandev.projecttopaz.data.models.WeatherDay;
-import com.nyandev.projecttopaz.data.models.WeatherInfo;
+import com.nyandev.projecttopaz.data.api.WeatherDay;
+import com.nyandev.projecttopaz.data.api.WeatherInfo;
 import com.nyandev.projecttopaz.utils.Utility;
 
 import net.cachapa.expandablelayout.ExpandableLayout;

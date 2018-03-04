@@ -33,7 +33,6 @@ public class SettingsActivity extends AppCompatActivity{
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Toast.makeText(this, "BACK", Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -1,7 +1,7 @@
-package com.nyandev.projecttopaz.data.models.interfaces;
+package com.nyandev.projecttopaz.data.api.interfaces;
 
-import com.nyandev.projecttopaz.data.models.WeatherForecast;
-import com.nyandev.projecttopaz.data.models.WeatherInfo;
+import com.nyandev.projecttopaz.data.api.WeatherForecast;
+import com.nyandev.projecttopaz.data.api.WeatherInfo;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
